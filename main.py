@@ -6,7 +6,7 @@ from pipeline import Compose, DetectorOptions, ReconstructionOptions
 from gt_creators import GranulesCreator, PorousCreator
 from ph_creators import PhantomCreator
 from projections import FlatFieldFromTomoTwinSource, ProjectionsCreator
-from simulation import RingsAugmentation
+from simulation import ShiftRingsAugmentation, RandomTimeFunction
 from reconstruction import ReconReconstruction
 from utils import seed_everything
 from tqdm import tqdm
@@ -75,7 +75,7 @@ if __name__ == '__main__':
                       ProjectionsCreator(detector_options),
                       
                       # add augmentations
-                      RingsAugmentation(detector_options, shift=-50), # affect flat_field
+                      ShiftRingsAugmentation(detector_options, shift=50), # affect flat_field
       
                       # reconstruct phantom: reconstructed
                       ReconReconstruction(reconstruction_options, detector_options)
